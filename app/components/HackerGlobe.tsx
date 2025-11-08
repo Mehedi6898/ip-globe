@@ -2,7 +2,8 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
-import type GlobeType from "react-globe.gl";
+
+type GlobeType = ReturnType<typeof Globe>;
 
 const Globe = dynamic(() => import("react-globe.gl"), { ssr: false }) as any;
 
@@ -121,7 +122,8 @@ export default function HackerGlobe({ authResponse }: { authResponse?: AuthRespo
 
     // slight delay so globe and controls can animate
     setTimeout(() => {
-      const g: GlobeType = globeRef.current;
+      const g = globeRef.current as unknown as GlobeType;
+
       if (!g) {
         setBusy(false);
         setShowAuthMessage(true); // fallback show message if globe missing

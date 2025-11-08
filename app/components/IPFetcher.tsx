@@ -66,7 +66,9 @@ export default function IPFetcher() {
                 <p>
                   🏳️ <span className="font-semibold">Flag:</span>{" "}
                   <span className="text-2xl">
-                    {String.fromCodePoint(...data.country_code.split('').map(c => 127397 + c.charCodeAt(0)))}
+                    {String.fromCodePoint(
+                      ...data.country_code.split("").map((c: string) => 127397 + c.charCodeAt(0))
+                    )}
                   </span>
                 </p>
               )}
