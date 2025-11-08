@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Bytron HAcks Server",
+  title: "Bytron Hacks Server",
   description: "Check your connection to Prediction Servers",
 };
 
