@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Bytron HAcks Server",
-  description: "Check your connection to Predition Servers",
+  description: "Check your connection to Prediction Servers",
 };
 
 export default function RootLayout({
