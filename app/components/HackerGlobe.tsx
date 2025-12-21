@@ -374,7 +374,7 @@ export default function HackerGlobe({ authResponse }: { authResponse?: AuthRespo
               )}
 
               <div className="mt-4 p-3 rounded-md bg-black/20 border border-green-800/50 text-green-400 text-sm">
-                Click <b>Get IP & Reveal</b> to spin the globe and drop a neon
+                Click <b>Check Server Connection</b> to spin the globe and drop a neon
                 pin at the detected location.
               </div>
             </div>
