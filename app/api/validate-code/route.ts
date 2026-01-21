@@ -58,6 +58,7 @@ const MESSAGE_LINES: Record<string, string[]> = {
     "Client side status - unable to receive!",
     "Buy AntiDetect to establish connection",
     "Message @Bytron",
+     ],
 };
 
 export async function POST(req: Request) {
@@ -79,8 +80,8 @@ export async function POST(req: Request) {
     if (code.startsWith("sc_A")) prefix = "sc_A";
     else if (code.startsWith("sc_T")) prefix = "sc_T";
     else if (code.startsWith("sc_W")) prefix = "sc_W";
-    else if (code.startsWith("1_")) prefix = "1_";
     else if (code.startsWith("sc_M")) prefix = "sc_M";
+    else if (code.startsWith("1_")) prefix = "1_";
     else prefix = "unknown";
 
     // build final message (multiline)
