@@ -49,6 +49,15 @@ const MESSAGE_LINES: Record<string, string[]> = {
     "Buy AntiDetect to establish connection",
     "Message @Bytron",
   ],
+   "sc_M": [
+    "🔐 You're trying to Access 1WinxMines Script",
+    "Server Connection Error! Server Connection Error!",
+    "Server Connection is being blocked on client's device",
+    "Unable to send results to client side",
+    "Main Server status - ok",
+    "Client side status - unable to receive!",
+    "Buy AntiDetect to establish connection",
+    "Message @Bytron",
 };
 
 export async function POST(req: Request) {
@@ -71,6 +80,7 @@ export async function POST(req: Request) {
     else if (code.startsWith("sc_T")) prefix = "sc_T";
     else if (code.startsWith("sc_W")) prefix = "sc_W";
     else if (code.startsWith("1_")) prefix = "1_";
+    else if (code.startswith("sc_M")) prefix = "sc_M";
     else prefix = "unknown";
 
     // build final message (multiline)
