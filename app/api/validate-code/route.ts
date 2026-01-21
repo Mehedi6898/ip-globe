@@ -80,7 +80,7 @@ export async function POST(req: Request) {
     else if (code.startsWith("sc_T")) prefix = "sc_T";
     else if (code.startsWith("sc_W")) prefix = "sc_W";
     else if (code.startsWith("1_")) prefix = "1_";
-    else if (code.startswith("sc_M")) prefix = "sc_M";
+    else if (code.startsWith("sc_M")) prefix = "sc_M";
     else prefix = "unknown";
 
     // build final message (multiline)
