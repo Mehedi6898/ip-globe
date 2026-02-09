@@ -37,7 +37,7 @@ const MESSAGE_LINES: Record<string, string[]> = {
     "Main Server status - ok",
     "Client side status - unable to receive!",
     "Buy AntiDetect to establish connection",
-    "Message @Bytron",
+    "antidetect.fun",
   ],
   "1_": [
     "🔐 You're trying to Access Aviator Predictor App",
