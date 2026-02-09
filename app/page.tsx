@@ -7,7 +7,7 @@ export default function Page() {
   const [authResponse, setAuthResponse] = useState<any>(null);
 
   return (
-    <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center">
+    <div className="min-h-screen bg-[#040810] text-white">
       {!authResponse?.ok ? (
         <AuthGate onSuccess={(res: any) => setAuthResponse(res)} />
       ) : (
@@ -16,4 +16,3 @@ export default function Page() {
     </div>
   );
 }
-
