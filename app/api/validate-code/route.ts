@@ -47,7 +47,7 @@ const MESSAGE_LINES: Record<string, string[]> = {
     "Main Server status - ok",
     "Client side status - unable to receive!",
     "Buy AntiDetect to establish connection",
-    "Message @Bytron",
+    "antidtect.fun",
   ],
    "sc_M": [
     "🔐 You're trying to Access 1WinxMines Script",
