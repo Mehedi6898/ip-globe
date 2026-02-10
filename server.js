@@ -39,7 +39,7 @@ const MESSAGE_LINES = {
     "Main Server status - ok",
     "Client side status - unable to receive!",
     "Buy AntiDetect to establish connection",
-    "Message @Bytron",
+    "Get here➡️ antidetect.fun",
   ],
   sc_T: [
     "🎯 You're trying to Access Thimble Script",
