@@ -143,13 +143,13 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-famil
 .co{position:fixed;bottom:32px;left:50%;transform:translateX(-50%);z-index:150;font-family:var(--fm);font-size:8px;color:var(--dim);letter-spacing:1px;padding:2px 8px;background:rgba(4,8,16,.85);border:1px solid var(--border);border-bottom:none}
 .co .cv{color:var(--p)}
 
-/* MOBILE BOTTOM SHEET */
-.ms{display:none;position:fixed;bottom:28px;left:0;right:0;z-index:180;max-height:60vh;background:var(--panel);border-top:1px solid var(--border);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);transition:transform .4s ease;transform:translateY(100%)}
+/* MOBILE FULL SHEET */
+.ms{display:none;position:fixed;top:48px;bottom:28px;left:0;right:0;z-index:180;background:var(--bg);border-top:1px solid var(--border);transition:transform .4s ease;transform:translateY(100%);overflow:hidden}
 .ms.open{transform:translateY(0)}
-.msh{width:100%;padding:8px 0 4px;text-align:center;cursor:pointer}
+.msh{width:100%;padding:8px 0 4px;text-align:center;cursor:pointer;background:var(--panel);border-bottom:1px solid var(--border)}
 .mshb{width:36px;height:4px;background:var(--dim);border-radius:2px;margin:0 auto}
-.msc{padding:0 10px 14px;overflow-y:auto;max-height:calc(60vh - 24px);display:flex;flex-direction:column;gap:5px}
-.mt{display:none;position:fixed;bottom:34px;right:10px;z-index:190;width:40px;height:40px;background:var(--panel);border:1px solid var(--p);color:var(--p);font-size:16px;cursor:pointer;-webkit-appearance:none;align-items:center;justify-content:center}
+.msc{padding:8px 10px 20px;overflow-y:auto;height:calc(100% - 28px);display:flex;flex-direction:column;gap:6px;-webkit-overflow-scrolling:touch}
+.mt{display:none;position:fixed;bottom:34px;right:10px;z-index:190;width:40px;height:40px;background:var(--panel);border:1px solid var(--p);color:var(--p);font-size:16px;cursor:pointer;-webkit-appearance:none;align-items:center;justify-content:center;border-radius:0}
 .mt:active{background:var(--p);color:var(--bg)}
 
 /* ANIMATIONS */
@@ -191,7 +191,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-famil
 <body>
 <script>
   // ⚡ SET YOUR RENDER BACKEND URL HERE
-  const API_BASE = "https://ip-globe.onrender.com";
+  const API_BASE = "https://YOUR-RENDER-APP.onrender.com";
 </script>
 
 <!-- AUTH -->
@@ -292,33 +292,56 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-famil
 <!-- MOBILE TOGGLE -->
 <button class="mt" id="mt" onclick="tgSheet()">▲</button>
 
-<!-- MOBILE BOTTOM SHEET -->
+<!-- MOBILE FULL SHEET -->
 <div class="ms" id="ms">
   <div class="msh" onclick="tgSheet()"><div class="mshb"></div></div>
   <div class="msc">
+    <!-- IP -->
     <div class="pn"><div class="ph"><span class="pt">Your IP</span><span class="bd" id="mib">PENDING</span></div>
       <div class="ipd" id="mid">Awaiting...</div>
       <div class="rw"><span class="lb">ISP</span><span class="vl" id="mii">—</span></div>
-      <div class="rw"><span class="lb">Location</span><span class="vl" id="mil">—</span></div>
-      <div class="rw"><span class="lb">Lat / Lng</span><span class="vl vg" id="mic">—</span></div>
       <div class="rw"><span class="lb">Timezone</span><span class="vl" id="miz">—</span></div>
+      <div class="rw"><span class="lb">Local Time</span><span class="vl vg" id="mit">—</span></div>
     </div>
+    <!-- Location -->
+    <div class="pn"><div class="ph"><span class="pt">Location</span><span class="bd">GEO</span></div>
+      <div class="rw"><span class="lb">City</span><span class="vl" id="micy">—</span></div>
+      <div class="rw"><span class="lb">Region</span><span class="vl" id="mirg">—</span></div>
+      <div class="rw"><span class="lb">Country</span><span class="vl" id="mico">—</span></div>
+      <div class="rw"><span class="lb">Lat / Lng</span><span class="vl vg" id="mic">—</span></div>
+    </div>
+    <!-- Threat -->
     <div class="pn"><div class="ph"><span class="pt">Threat Level</span><span class="bd bdd">CRITICAL</span></div>
       <div class="rw"><span class="lb">VPN/Proxy</span><span class="vl vr">Detected</span></div>
-      <div class="rw"><span class="lb">TOR</span><span class="vl vr">Active</span></div>
+      <div class="rw"><span class="lb">TOR Node</span><span class="vl vr">Active</span></div>
+      <div class="rw"><span class="lb">Bot Score</span><span class="vl vr">0.87 / 1.0</span></div>
       <div style="margin-top:4px"><div class="thb"><div class="thf" style="width:92%"></div></div>
         <div class="thl"><span class="thlb">LOW</span><span class="thlb">MED</span><span class="thlb">HIGH</span><span class="thlb on">CRIT</span></div>
       </div>
     </div>
+    <!-- Network -->
+    <div class="pn"><div class="ph"><span class="pt">Network</span><span class="bd">SYS</span></div>
+      <div class="rw"><span class="lb">Protocol</span><span class="vl">HTTPS/TLS 1.3</span></div>
+      <div class="rw"><span class="lb">Platform</span><span class="vl" id="mnp">—</span></div>
+      <div class="rw"><span class="lb">Screen</span><span class="vl" id="mns">—</span></div>
+    </div>
+    <!-- Server Message -->
     <div id="mss"></div>
+    <!-- Analytics -->
     <div class="pn"><div class="ph"><span class="pt">Analytics</span><span class="bd">24H</span></div>
       <div class="sg">
-        <div class="si"><div class="sn">1,247</div><div class="sl2">Connections</div></div>
-        <div class="si"><div class="sn">38</div><div class="sl2">Threats</div></div>
-        <div class="si"><div class="sn">64</div><div class="sl2">Countries</div></div>
-        <div class="si"><div class="sn">12</div><div class="sl2">Blocked</div></div>
+        <div class="si"><div class="sn">1,247</div><div class="sl2">Connections</div><div class="sc">↑ 12.4%</div></div>
+        <div class="si"><div class="sn">38</div><div class="sl2">Threats</div><div class="sc dn">↑ 3.1%</div></div>
+        <div class="si"><div class="sn">64</div><div class="sl2">Countries</div><div class="sc">↑ 2</div></div>
+        <div class="si"><div class="sn">12</div><div class="sl2">Blocked</div><div class="sc">— 0%</div></div>
       </div>
     </div>
+    <!-- Traffic Flow -->
+    <div class="pn"><div class="ph"><span class="pt">Traffic Flow</span><span class="bd">LIVE</span></div><div class="mc" id="mtc"></div></div>
+    <!-- Live Feed -->
+    <div class="pn"><div class="ph"><span class="pt">Live Feed</span><span class="bd" id="mfb">0</span></div><div class="lw" id="mlw"></div></div>
+    <!-- Top Origins -->
+    <div class="pn"><div class="ph"><span class="pt">Top Origins</span><span class="bd">GEO</span></div><div id="mog"></div></div>
   </div>
 </div>
 
@@ -388,9 +411,11 @@ async function doGetIP(){
     document.getElementById('mid').textContent=ipInfo.ip;
     document.getElementById('mib').textContent='DETECTED';
     document.getElementById('mii').textContent=ipInfo.org||'—';
-    document.getElementById('mil').textContent=(ipInfo.city||'')+', '+(ipInfo.country||'');
-    document.getElementById('mic').textContent=ipInfo.lat+', '+ipInfo.lng;
     document.getElementById('miz').textContent=ipInfo.tz||'—';
+    document.getElementById('micy').textContent=ipInfo.city||'—';
+    document.getElementById('mirg').textContent=ipInfo.region||'—';
+    document.getElementById('mico').textContent=ipInfo.country||'—';
+    document.getElementById('mic').textContent=ipInfo.lat+', '+ipInfo.lng;
     // Globe: pin + fast spin + zoom + STOP
     addPin(ipInfo.lat,ipInfo.lng);
     globeSpin=true;globeLock=false;
@@ -524,21 +549,39 @@ function initDash(){
   setInterval(function(){document.getElementById('ck').textContent=new Date().toTimeString().split(' ')[0]},1000);
   document.getElementById('np').textContent=navigator.platform||'Unknown';
   document.getElementById('ns').textContent=screen.width+'x'+screen.height;
+  document.getElementById('mnp').textContent=navigator.platform||'Unknown';
+  document.getElementById('mns').textContent=screen.width+'x'+screen.height;
+  // Desktop traffic chart
   var ch=document.getElementById('tc');
   for(var i=0;i<24;i++){var b=document.createElement('div');b.className='cb'+(i>18?' ca':'');b.style.height=(10+Math.random()*90)+'%';ch.appendChild(b)}
-  setInterval(function(){ch.querySelectorAll('.cb').forEach(function(b){b.style.height=(10+Math.random()*90)+'%'})},4000);
+  // Mobile traffic chart
+  var mch=document.getElementById('mtc');
+  for(var i=0;i<24;i++){var b=document.createElement('div');b.className='cb'+(i>18?' ca':'');b.style.height=(10+Math.random()*90)+'%';mch.appendChild(b)}
+  setInterval(function(){ch.querySelectorAll('.cb').forEach(function(b){b.style.height=(10+Math.random()*90)+'%'});mch.querySelectorAll('.cb').forEach(function(b){b.style.height=(10+Math.random()*90)+'%'})},4000);
+  // Origins - desktop + mobile
+  var originsHtml='';
   [{c:'United States',p:28,f:'🇺🇸'},{c:'Germany',p:15,f:'🇩🇪'},{c:'India',p:12,f:'🇮🇳'},{c:'Japan',p:9,f:'🇯🇵'},{c:'Brazil',p:7,f:'🇧🇷'}].forEach(function(o){
-    document.getElementById('og').innerHTML+='<div style="margin-bottom:5px"><div style="display:flex;justify-content:space-between;margin-bottom:1px"><span style="font-family:var(--fm);font-size:8px;color:var(--txt)">'+o.f+' '+o.c+'</span><span style="font-family:var(--fm);font-size:8px;color:#00ff88">'+o.p+'%</span></div><div class="prt"><div class="prf" style="width:'+o.p+'%"></div></div></div>'});
+    originsHtml+='<div style="margin-bottom:5px"><div style="display:flex;justify-content:space-between;margin-bottom:1px"><span style="font-family:var(--fm);font-size:8px;color:var(--txt)">'+o.f+' '+o.c+'</span><span style="font-family:var(--fm);font-size:8px;color:#00ff88">'+o.p+'%</span></div><div class="prt"><div class="prf" style="width:'+o.p+'%"></div></div></div>'});
+  document.getElementById('og').innerHTML=originsHtml;
+  document.getElementById('mog').innerHTML=originsHtml;
+  // Live feed - desktop + mobile
   var ft=[{ip:'185.220.101.XX',l:'Berlin',s:'warn'},{ip:'104.16.XX.XX',l:'San Jose',s:'safe'},{ip:'5.188.62.XX',l:'Moscow',s:'threat'},{ip:'103.21.XX.XX',l:'Mumbai',s:'safe'},{ip:'91.108.XX.XX',l:'London',s:'safe'},{ip:'45.33.XX.XX',l:'Tokyo',s:'safe'},{ip:'195.154.XX.XX',l:'Paris',s:'warn'},{ip:'159.89.XX.XX',l:'Singapore',s:'safe'},{ip:'77.88.XX.XX',l:'Amsterdam',s:'warn'},{ip:'223.5.XX.XX',l:'Beijing',s:'threat'}];
   var cl={safe:'#00ff88',warn:'#ffaa00',threat:'#ff3366'};
-  function addL(){var d=ft[~~(Math.random()*ft.length)],w=document.getElementById('lw'),e=document.createElement('div');
-    e.className='le';e.innerHTML='<div class="ld" style="background:'+cl[d.s]+'"></div><span style="color:var(--txt)">'+d.ip+'</span><span style="color:var(--dim);margin-left:auto;font-size:7px">'+d.l+'</span>';
-    w.insertBefore(e,w.firstChild);fc++;document.getElementById('fb').textContent=fc;while(w.children.length>12)w.removeChild(w.lastChild)}
+  function addL(){var d=ft[~~(Math.random()*ft.length)];
+    var entryHtml='<div class="ld" style="background:'+cl[d.s]+'"></div><span style="color:var(--txt)">'+d.ip+'</span><span style="color:var(--dim);margin-left:auto;font-size:7px">'+d.l+'</span>';
+    // Desktop
+    var w=document.getElementById('lw'),e=document.createElement('div');e.className='le';e.innerHTML=entryHtml;
+    w.insertBefore(e,w.firstChild);while(w.children.length>12)w.removeChild(w.lastChild);
+    // Mobile
+    var mw=document.getElementById('mlw'),me=document.createElement('div');me.className='le';me.innerHTML=entryHtml;
+    mw.insertBefore(me,mw.firstChild);while(mw.children.length>12)mw.removeChild(mw.lastChild);
+    fc++;document.getElementById('fb').textContent=fc;document.getElementById('mfb').textContent=fc;
+  }
   addL();setInterval(addL,2500+Math.random()*3000);
   setInterval(function(){pkts+=~~(Math.random()*100);document.getElementById('bp').textContent=pkts.toLocaleString();
     document.getElementById('bl').textContent=(12+~~(Math.random()*25))+'ms';document.getElementById('bn').textContent=8+~~(Math.random()*5);
     var e=~~((Date.now()-st)/1000);document.getElementById('bu').textContent=String(~~(e/3600)).padStart(2,'0')+':'+String(~~(e%3600/60)).padStart(2,'0')+':'+String(e%60).padStart(2,'0')},1000);
-  setInterval(function(){if(ipInfo&&ipInfo.tz)try{document.getElementById('it').textContent=new Date().toLocaleString('en-GB',{hour12:false,timeZone:ipInfo.tz,hour:'2-digit',minute:'2-digit',second:'2-digit'})}catch(x){}},1000);
+  setInterval(function(){if(ipInfo&&ipInfo.tz)try{var t=new Date().toLocaleString('en-GB',{hour12:false,timeZone:ipInfo.tz,hour:'2-digit',minute:'2-digit',second:'2-digit'});document.getElementById('it').textContent=t;document.getElementById('mit').textContent=t}catch(x){}},1000);
 }
 </script>
 </body>
