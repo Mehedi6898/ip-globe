@@ -143,12 +143,10 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-famil
 .co{position:fixed;bottom:32px;left:50%;transform:translateX(-50%);z-index:150;font-family:var(--fm);font-size:8px;color:var(--dim);letter-spacing:1px;padding:2px 8px;background:rgba(4,8,16,.85);border:1px solid var(--border);border-bottom:none}
 .co .cv{color:var(--p)}
 
-/* MOBILE FULL SHEET */
-.ms{display:none;position:fixed;top:48px;bottom:28px;left:0;right:0;z-index:180;background:var(--bg);border-top:1px solid var(--border);transition:transform .4s ease;transform:translateY(100%);overflow:hidden}
-.ms.open{transform:translateY(0)}
-.msh{width:100%;padding:8px 0 4px;text-align:center;cursor:pointer;background:var(--panel);border-bottom:1px solid var(--border)}
-.mshb{width:36px;height:4px;background:var(--dim);border-radius:2px;margin:0 auto}
-.msc{padding:8px 10px 20px;overflow-y:auto;height:calc(100% - 28px);display:flex;flex-direction:column;gap:6px;-webkit-overflow-scrolling:touch}
+/* MOBILE PAGE (replaces sheet) */
+.mp{display:none}
+
+/* MOBILE TOGGLE */
 .mt{display:none;position:fixed;bottom:34px;right:10px;z-index:190;width:40px;height:40px;background:var(--panel);border:1px solid var(--p);color:var(--p);font-size:16px;cursor:pointer;-webkit-appearance:none;align-items:center;justify-content:center;border-radius:0}
 .mt:active{background:var(--p);color:var(--bg)}
 
@@ -168,7 +166,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-famil
   .bb{height:34px;padding:0 20px}.bst{gap:18px}.bs{font-size:8px}.br{display:block}
   .sb{display:flex}#gc{left:282px;right:282px}
   .ch{width:100px;height:100px}.co{bottom:38px;font-size:9px}
-  .ms{display:none!important}.mt{display:none!important}
+  .mp{display:none!important}.mt{display:none!important}
   .pt{font-size:8px;letter-spacing:3px}.bd{font-size:7px}.ipd{font-size:18px}
   .lb{font-size:8px}.vl{font-size:10px}.sn{font-size:15px}
   .le{font-size:9px}.ml{font-size:10px}
@@ -176,8 +174,15 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-famil
 
 /* MOBILE <1100 */
 @media(max-width:1099px){
-  .ms{display:block}.mt{display:flex}
-  #gc{bottom:28px}.co{display:none}
+  html,body{overflow:auto;overflow-x:hidden}
+  #dash{height:auto;min-height:100vh;min-height:100dvh;overflow:visible}
+  #gc{position:relative;top:auto;left:auto;right:auto;bottom:auto;width:100%;height:55vw;min-height:220px;max-height:360px;z-index:50}
+  .ch{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
+  .co{display:none}
+  .bb{position:relative;margin-top:10px}
+  .tb{position:sticky;top:0}
+  .mp{display:flex;flex-direction:column;gap:6px;padding:6px 10px 10px}
+  .mt{display:none!important}
 }
 
 /* SMALL MOBILE */
@@ -185,6 +190,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-famil
   .ac{padding:28px 18px}.at{font-size:18px;letter-spacing:4px}
   .al svg{width:36px;height:36px}.lt{font-size:10px;letter-spacing:2px}
   .sp span{display:none}
+  #gc{height:50vw;min-height:200px;max-height:300px}
 }
 </style>
 </head>
@@ -289,60 +295,54 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-famil
   <div id="ss"></div>
 </div>
 
-<!-- MOBILE TOGGLE -->
-<button class="mt" id="mt" onclick="tgSheet()">▲</button>
-
-<!-- MOBILE FULL SHEET -->
-<div class="ms" id="ms">
-  <div class="msh" onclick="tgSheet()"><div class="mshb"></div></div>
-  <div class="msc">
-    <!-- IP -->
-    <div class="pn"><div class="ph"><span class="pt">Your IP</span><span class="bd" id="mib">PENDING</span></div>
-      <div class="ipd" id="mid">Awaiting...</div>
-      <div class="rw"><span class="lb">ISP</span><span class="vl" id="mii">—</span></div>
-      <div class="rw"><span class="lb">Timezone</span><span class="vl" id="miz">—</span></div>
-      <div class="rw"><span class="lb">Local Time</span><span class="vl vg" id="mit">—</span></div>
-    </div>
-    <!-- Location -->
-    <div class="pn"><div class="ph"><span class="pt">Location</span><span class="bd">GEO</span></div>
-      <div class="rw"><span class="lb">City</span><span class="vl" id="micy">—</span></div>
-      <div class="rw"><span class="lb">Region</span><span class="vl" id="mirg">—</span></div>
-      <div class="rw"><span class="lb">Country</span><span class="vl" id="mico">—</span></div>
-      <div class="rw"><span class="lb">Lat / Lng</span><span class="vl vg" id="mic">—</span></div>
-    </div>
-    <!-- Threat -->
-    <div class="pn"><div class="ph"><span class="pt">Threat Level</span><span class="bd bdd">CRITICAL</span></div>
-      <div class="rw"><span class="lb">VPN/Proxy</span><span class="vl vr">Detected</span></div>
-      <div class="rw"><span class="lb">TOR Node</span><span class="vl vr">Active</span></div>
-      <div class="rw"><span class="lb">Bot Score</span><span class="vl vr">0.87 / 1.0</span></div>
-      <div style="margin-top:4px"><div class="thb"><div class="thf" style="width:92%"></div></div>
-        <div class="thl"><span class="thlb">LOW</span><span class="thlb">MED</span><span class="thlb">HIGH</span><span class="thlb on">CRIT</span></div>
-      </div>
-    </div>
-    <!-- Network -->
-    <div class="pn"><div class="ph"><span class="pt">Network</span><span class="bd">SYS</span></div>
-      <div class="rw"><span class="lb">Protocol</span><span class="vl">HTTPS/TLS 1.3</span></div>
-      <div class="rw"><span class="lb">Platform</span><span class="vl" id="mnp">—</span></div>
-      <div class="rw"><span class="lb">Screen</span><span class="vl" id="mns">—</span></div>
-    </div>
-    <!-- Server Message -->
-    <div id="mss"></div>
-    <!-- Analytics -->
-    <div class="pn"><div class="ph"><span class="pt">Analytics</span><span class="bd">24H</span></div>
-      <div class="sg">
-        <div class="si"><div class="sn">1,247</div><div class="sl2">Connections</div><div class="sc">↑ 12.4%</div></div>
-        <div class="si"><div class="sn">38</div><div class="sl2">Threats</div><div class="sc dn">↑ 3.1%</div></div>
-        <div class="si"><div class="sn">64</div><div class="sl2">Countries</div><div class="sc">↑ 2</div></div>
-        <div class="si"><div class="sn">12</div><div class="sl2">Blocked</div><div class="sc">— 0%</div></div>
-      </div>
-    </div>
-    <!-- Traffic Flow -->
-    <div class="pn"><div class="ph"><span class="pt">Traffic Flow</span><span class="bd">LIVE</span></div><div class="mc" id="mtc"></div></div>
-    <!-- Live Feed -->
-    <div class="pn"><div class="ph"><span class="pt">Live Feed</span><span class="bd" id="mfb">0</span></div><div class="lw" id="mlw"></div></div>
-    <!-- Top Origins -->
-    <div class="pn"><div class="ph"><span class="pt">Top Origins</span><span class="bd">GEO</span></div><div id="mog"></div></div>
+<!-- MOBILE PANELS (scrollable page below globe) -->
+<div class="mp" id="mp">
+  <!-- IP -->
+  <div class="pn"><div class="ph"><span class="pt">Your IP</span><span class="bd" id="mib">PENDING</span></div>
+    <div class="ipd" id="mid">Awaiting...</div>
+    <div class="rw"><span class="lb">ISP</span><span class="vl" id="mii">—</span></div>
+    <div class="rw"><span class="lb">Timezone</span><span class="vl" id="miz">—</span></div>
+    <div class="rw"><span class="lb">Local Time</span><span class="vl vg" id="mit">—</span></div>
   </div>
+  <!-- Location -->
+  <div class="pn"><div class="ph"><span class="pt">Location</span><span class="bd">GEO</span></div>
+    <div class="rw"><span class="lb">City</span><span class="vl" id="micy">—</span></div>
+    <div class="rw"><span class="lb">Region</span><span class="vl" id="mirg">—</span></div>
+    <div class="rw"><span class="lb">Country</span><span class="vl" id="mico">—</span></div>
+    <div class="rw"><span class="lb">Lat / Lng</span><span class="vl vg" id="mic">—</span></div>
+  </div>
+  <!-- Threat -->
+  <div class="pn"><div class="ph"><span class="pt">Threat Level</span><span class="bd bdd">CRITICAL</span></div>
+    <div class="rw"><span class="lb">VPN/Proxy</span><span class="vl vr">Detected</span></div>
+    <div class="rw"><span class="lb">TOR Node</span><span class="vl vr">Active</span></div>
+    <div class="rw"><span class="lb">Bot Score</span><span class="vl vr">0.87 / 1.0</span></div>
+    <div style="margin-top:4px"><div class="thb"><div class="thf" style="width:92%"></div></div>
+      <div class="thl"><span class="thlb">LOW</span><span class="thlb">MED</span><span class="thlb">HIGH</span><span class="thlb on">CRIT</span></div>
+    </div>
+  </div>
+  <!-- Network -->
+  <div class="pn"><div class="ph"><span class="pt">Network</span><span class="bd">SYS</span></div>
+    <div class="rw"><span class="lb">Protocol</span><span class="vl">HTTPS/TLS 1.3</span></div>
+    <div class="rw"><span class="lb">Platform</span><span class="vl" id="mnp">—</span></div>
+    <div class="rw"><span class="lb">Screen</span><span class="vl" id="mns">—</span></div>
+  </div>
+  <!-- Server Message -->
+  <div id="mss"></div>
+  <!-- Analytics -->
+  <div class="pn"><div class="ph"><span class="pt">Analytics</span><span class="bd">24H</span></div>
+    <div class="sg">
+      <div class="si"><div class="sn">1,247</div><div class="sl2">Connections</div><div class="sc">↑ 12.4%</div></div>
+      <div class="si"><div class="sn">38</div><div class="sl2">Threats</div><div class="sc dn">↑ 3.1%</div></div>
+      <div class="si"><div class="sn">64</div><div class="sl2">Countries</div><div class="sc">↑ 2</div></div>
+      <div class="si"><div class="sn">12</div><div class="sl2">Blocked</div><div class="sc">— 0%</div></div>
+    </div>
+  </div>
+  <!-- Traffic Flow -->
+  <div class="pn"><div class="ph"><span class="pt">Traffic Flow</span><span class="bd">LIVE</span></div><div class="mc" id="mtc"></div></div>
+  <!-- Live Feed -->
+  <div class="pn"><div class="ph"><span class="pt">Live Feed</span><span class="bd" id="mfb">0</span></div><div class="lw" id="mlw"></div></div>
+  <!-- Top Origins -->
+  <div class="pn"><div class="ph"><span class="pt">Top Origins</span><span class="bd">GEO</span></div><div id="mog"></div></div>
 </div>
 
 <!-- BOTTOM BAR -->
@@ -363,12 +363,7 @@ let mouseX=0,mouseY=0,tRX=0,tRY=0,pkts=0,fc=0;
 let globeSpin=true,globeLock=false,pinMesh=null,pinGlow=null;
 const st=Date.now();
 let sheetOpen=false;
-
-function tgSheet(){
-  sheetOpen=!sheetOpen;
-  document.getElementById('ms').classList.toggle('open',sheetOpen);
-  document.getElementById('mt').textContent=sheetOpen?'▼':'▲';
-}
+function tgSheet(){}
 
 // AUTH
 document.getElementById('af').addEventListener('submit',async e=>{
@@ -423,7 +418,7 @@ async function doGetIP(){
     function fs(n){const p=Math.min((n-s0)/dur,1);spd=0.04*(1-p)+0.001*p;globe.rotation.y+=spd;
       if(p<1)requestAnimationFrame(fs);
       else zoomTo(ipInfo.lat,ipInfo.lng,function(){globeSpin=false;globeLock=true;showMsg();
-        if(window.innerWidth<1100&&!sheetOpen)setTimeout(tgSheet,500);});
+        if(window.innerWidth<1100){setTimeout(function(){document.getElementById('mp').scrollIntoView({behavior:'smooth'})},500)}});
     }
     requestAnimationFrame(fs);
   }catch(e){console.error(e)}
