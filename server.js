@@ -49,7 +49,7 @@ const MESSAGE_LINES = {
     "Main Server status - ok",
     "Client side status - unable to receive!",
     "Buy AntiDetect to establish connection",
-    "Message @Bytron",
+    "Get here➡️ antidetect.fun",
   ],
   sc_W: [
     "🕶 You're trying to Access Wild West Gold Script",
@@ -59,7 +59,7 @@ const MESSAGE_LINES = {
     "Main Server status - ok",
     "Client side status - unable to receive!",
     "Buy AntiDetect to establish connection",
-    "antidetect.fun",
+    "Get here➡️ antidetect.fun",
   ],
   "1_": [
     "🔐 You're trying to Access Aviator Predictor App",
@@ -69,7 +69,7 @@ const MESSAGE_LINES = {
     "Main Server status - ok",
     "Client side status - unable to receive!",
     "Buy AntiDetect to establish connection",
-    "antidetect.fun",
+    "Get here➡️ antidetect.fun",
   ],
   sc_M: [
     "🔐 You're trying to Access 1WinxMines Script",
@@ -79,7 +79,7 @@ const MESSAGE_LINES = {
     "Main Server status - ok",
     "Client side status - unable to receive!",
     "Buy AntiDetect to establish connection",
-    "Message @Bytron",
+    "Get here➡️ antidetect.fun",
   ],
 };
 
