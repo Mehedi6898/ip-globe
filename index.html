@@ -402,7 +402,7 @@ async function doGetIP(){
     if(!ipInfo)try{var r4=await fetch('https://ipinfo.io/json');var d4=await r4.json();
       if(d4&&d4.ip){var lc=d4.loc?d4.loc.split(','):['0','0'];
         ipInfo={ip:d4.ip,city:d4.city||'',region:d4.region||'',country:d4.country||'',lat:parseFloat(lc[0])||0,lng:parseFloat(lc[1])||0,org:d4.org||'',tz:d4.timezone||''};}}catch(x){}
-    if(!ipInfo){b.textContent='GET IP & REVEAL';b.disabled=false;return;}
+    if(!ipInfo){b.textContent='Check Connection';b.disabled=false;return;}
     // VPN/Proxy/TOR detection via proxycheck.io (free, no key, 100/day)
     ipInfo.vpn=false;ipInfo.tor=false;ipInfo.proxyType='';
     try{var rp=await fetch('https://proxycheck.io/v2/'+ipInfo.ip+'?vpn=1&risk=1');var dp=await rp.json();
@@ -448,7 +448,7 @@ async function doGetIP(){
     }
     requestAnimationFrame(fs);
   }catch(e){console.error(e)}
-  finally{b.textContent='GET IP & REVEAL';b.disabled=false}
+  finally{b.textContent='Check Connection';b.disabled=false}
 }
 
 // THREAT PANEL — real detection
